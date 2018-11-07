@@ -1,0 +1,23 @@
+def factorize(n, primes):
+    factors = []
+    for p in primes:
+        if p*p > n: break
+        i = 0
+        while n % p == 0:
+            n //= p
+            i+=1
+        if i > 0:
+            factors.append((p, i));
+    if n > 1: factors.append((n, 1))
+
+    return factors
+	
+def primes(n):
+    sieve = [True] * n
+    for i in range(3,int(n**0.5)+1,2):
+        if sieve[i]:
+            sieve[i*i::2*i]=[False]*int((n-i*i-1)/(2*i)+1)
+    return [2] + [i for i in range(3,n,2) if sieve[i]]
+
+for x in range(1,18):	
+	print(factorize(x,primes(100)))
